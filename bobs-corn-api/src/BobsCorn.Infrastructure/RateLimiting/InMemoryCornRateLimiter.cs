@@ -9,7 +9,7 @@ namespace BobsCorn.Infrastructure.RateLimiting
         private readonly IClock _clock;
         private readonly ConcurrentDictionary<string, DateTimeOffset> _lastPurchaseByClient = new();
 
-        private static readonly TimeSpan RateLimitWindow = TimeSpan.FromSeconds(1);
+        private static readonly TimeSpan RateLimitWindow = TimeSpan.FromMinutes(1);
 
         public InMemoryCornRateLimiter(IClock clock)
         {
