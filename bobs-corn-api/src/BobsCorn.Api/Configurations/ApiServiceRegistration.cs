@@ -32,7 +32,10 @@ namespace BobsCorn.Api.Configurations
             services.AddApplication();
 
             //Infrastructure
-            services.AddInfrastructure();
+            var connectionString = configuration.GetConnectionString("BobsCorn") 
+                ?? throw new InvalidOperationException("Connection string 'BobsCorn' is not configured.");
+            
+            services.AddInfrastructure(connectionString);
 
             return services;
         }
