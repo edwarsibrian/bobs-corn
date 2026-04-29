@@ -1,4 +1,6 @@
-﻿using BobsCorn.Api.Settings;
+﻿using BobsCorn.Api.Exceptions;
+using BobsCorn.Api.Settings;
+using BobsCorn.Api.Swagger;
 using BobsCorn.Application.Configurations;
 using BobsCorn.Infrastructure.Configurations;
 
@@ -25,6 +27,15 @@ namespace BobsCorn.Api.Configurations
                 });
             });
 
+            //Swagger
+            services.AddSwaggerGen(options =>
+            {
+                options.OperationFilter<AddClientIdHeaderOperationFilter>();
+            });
+
+            //Exception handling and details
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
 
             //Application
             services.AddApplication();
@@ -34,6 +45,7 @@ namespace BobsCorn.Api.Configurations
                 ?? throw new InvalidOperationException("Connection string 'BobsCorn' is not configured.");
             
             services.AddInfrastructure(connectionString);
+
 
             return services;
         }
