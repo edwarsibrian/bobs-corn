@@ -20,7 +20,7 @@ namespace BobsCorn.Application.Tests.Corn.BuyCorn
             result.IsValid.Should().BeFalse();
             result.Errors.Should().Contain(error =>
                 error.PropertyName == nameof(BuyCornCommand.ClientId) &&
-                error.ErrorMessage == "ClientId is required.");
+                error.ErrorMessage == "X-Client-Id header is required.");
         }
     }
 }

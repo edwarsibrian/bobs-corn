@@ -1,6 +1,7 @@
 ﻿using BobsCorn.Application.Clock;
 using BobsCorn.Application.RateLimiting;
 using MediatR;
+using BobsCorn.Domain.Corn;
 
 namespace BobsCorn.Application.Corn.BuyCorn
 {
@@ -33,7 +34,12 @@ namespace BobsCorn.Application.Corn.BuyCorn
                     RetryAfterSeconds: (int)Math.Ceiling(rateLimit.RetryAfter.TotalSeconds));
             }
 
-            var total = await _cornPurchaseStore.AddCornPurchaseAsync(command.ClientId, _clock.UtcNow, cancellationToken);
+            var cornPurchase = CornPurchase.Create(command.ClientId, _clock.UtcNow);
+
+            var total = await _cornPurchaseStore.AddCornPurchaseAsync(
+                cornPurchase.ClientId,
+                cornPurchase.PurchasedAtUtc,
+                cancellationToken);
 
             return new BuyCornResult(
                 Success: true,

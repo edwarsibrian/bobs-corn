@@ -8,7 +8,7 @@ namespace BobsCorn.Application.Corn.BuyCorn
         {
             RuleFor(x => x.ClientId)
                 .NotEmpty()
-                .WithMessage("ClientId is required.")
+                .WithMessage("X-Client-Id header is required.")
                 .MaximumLength(100)
                 .WithMessage("ClientId cannot exceed 100 characters.");
         }
