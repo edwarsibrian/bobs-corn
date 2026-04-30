@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.brand-logo {
+    height: 1.1em;
+    width: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
